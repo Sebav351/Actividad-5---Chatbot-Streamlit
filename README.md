@@ -102,6 +102,8 @@ Las capturas se renderizaron desde PyBullet con el mismo URDF y la conversion AD
 
 ![Vista cercana del dedo derecho en ADC 4095](capturas/06_dedo_der_ADC4095.png)
 
+Funcionamiento: https://youtube.com/shorts/_HUl58UIoE0?feature=share
+
 ![Vista general del brazo con P5 en ADC 4095](capturas/05_joint_dedo_der_ADC4095.png)
 
 
