@@ -104,8 +104,4 @@ Las capturas se renderizaron desde PyBullet con el mismo URDF y la conversion AD
 
 ![Vista general del brazo con P5 en ADC 4095](capturas/05_joint_dedo_der_ADC4095.png)
 
-Estas son capturas de la simulacion con entradas ADC controladas, no fotografias de la protoboard ni mediciones reales de los potenciometros.
 
-
-3. Antes del primer commit, verifica que aparezcan `main.py`, `brazo.urdf`, `environment.yml`, `README.md`, `capturas/` y `firmware/`.
-4. Confirma los cambios y publica el repositorio. El `.gitignore` del paquete excluye entornos Python, archivos temporales y la carpeta `.pio` que PlatformIO genera al compilar.
