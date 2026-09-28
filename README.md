@@ -106,49 +106,6 @@ Las capturas se renderizaron desde PyBullet con el mismo URDF y la conversion AD
 
 Estas son capturas de la simulacion con entradas ADC controladas, no fotografias de la protoboard ni mediciones reales de los potenciometros.
 
-## Instalar y cargar firmware
 
-Abre una terminal en la raiz de `Brazo_URDF_GitHub` y ejecuta:
-
-```powershell
-pio run -d firmware
-pio run -d firmware --target upload --upload-port COM8
-```
-
-Cierra el monitor serie de PlatformIO/Thonny antes de iniciar el controlador, porque solo una aplicacion puede abrir el puerto USB a la vez. Sustituye `COM8` por el puerto de tu ESP32. El firmware transmite a 115200 baudios una linea cada 50 ms con el formato `J,base,brazo,altura_pinza,dedo_izq,dedo_der` (posiciones en radianes o metros, segun la articulacion).
-
-## Instalar y ejecutar Python
-
-En Windows instala [Micromamba](https://mamba.readthedocs.io/en/latest/installation/micromamba-installation.html) o Conda para obtener el paquete PyBullet precompilado de conda-forge; asi no hace falta compilar codigo C++.
-
-Desde la raiz de `Brazo_URDF_GitHub`, crea el entorno y lista los puertos disponibles:
-
-```powershell
-micromamba create --yes --file environment.yml --prefix .conda-env
-micromamba run --prefix .conda-env python main.py --list-ports
-```
-
-Con Conda, usa `conda env create --file environment.yml --prefix .conda-env` y luego sustituye `micromamba run` por `conda run`.
-
-Ejecuta con el puerto que corresponda, por ejemplo:
-
-```powershell
-micromamba run --prefix .conda-env python main.py --port COM8
-```
-
-Si no se indica un puerto y hay exactamente un puerto serie disponible, se selecciona automaticamente. Para probar la simulacion sin placa:
-
-```powershell
-micromamba run --prefix .conda-env python main.py --demo
-```
-
-En modo demo, mueve los cinco deslizadores de PyBullet. En ambos modos se puede detener el programa con Ctrl+C; al cerrar la ventana de PyBullet tambien se libera el puerto serie. El firmware solo lee potenciometros y transmite sus posiciones: no controla ni alimenta motores reales. Para accionar un brazo fisico se necesita una etapa de potencia/controlador y una fuente adecuada.
-
-## Publicar en GitHub
-
-La carpeta `Brazo_URDF_GitHub` es la raiz independiente de este proyecto. Sube su contenido completo, incluida la carpeta `capturas/`; no subas la carpeta contenedora `U_Militar-main` ni el entorno `.conda-env`.
-
-1. Crea en GitHub un repositorio vacio para el brazo, sin generar otro README ni `.gitignore`.
-2. Con GitHub Desktop, agrega o crea el repositorio local usando `Brazo_URDF_GitHub` como carpeta raiz.
 3. Antes del primer commit, verifica que aparezcan `main.py`, `brazo.urdf`, `environment.yml`, `README.md`, `capturas/` y `firmware/`.
 4. Confirma los cambios y publica el repositorio. El `.gitignore` del paquete excluye entornos Python, archivos temporales y la carpeta `.pio` que PlatformIO genera al compilar.
